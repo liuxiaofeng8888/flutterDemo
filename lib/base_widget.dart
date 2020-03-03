@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/login_widget.dart';
 import 'package:flutter_app/stateful_demo.dart';
 
 ///布局小尝试
@@ -34,7 +35,7 @@ class MyBaseWidget extends StatelessWidget {
 //            color: Colors.red[500],
 //          ),
 //          new Text('41')
-        new FavoriteWidget()
+          new FavoriteWidget()
         ],
       ),
     );
@@ -86,13 +87,21 @@ class MyBaseWidget extends StatelessWidget {
 
     ///图片部分
     Widget imageSection = new Container(
+        child: GestureDetector(
       child: new Image.asset(
         'image/lake.png',
         width: 600.0,
         height: 240.0,
         fit: BoxFit.cover,
       ),
-    );
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return loginRoute(
+            text: "点击图片带过来的文案",
+          );
+        }));
+      },
+    ));
 
     return new Scaffold(
       body: new ListView(
