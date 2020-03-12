@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/drawer_widget.dart';
 
-import 'login_widget.dart';
+import 'widgets/login_widget.dart';
 
 ///主页面
 class HomeWidget extends StatelessWidget {
@@ -44,15 +45,13 @@ class HomeWidget extends StatelessWidget {
                     left: 0, top: 10, right: 0, bottom: 10),
                 child: GestureDetector(
                   child: Text(
-                    "world",
+                    "抽屉页面",
                     style: TextStyle(color: Colors.green, fontSize: 15),
                   ),
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                          return loginRoute(
-                            text: "点击图片带过来的文案",
-                          );
+                          return DrawerWidget();
                         }));
                   },
                 ),

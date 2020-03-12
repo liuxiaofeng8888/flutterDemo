@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/login_widget.dart';
+import 'package:flutter_app/widgets/login_widget.dart';
 import 'package:flutter_app/stateful_demo.dart';
 
 ///布局小尝试

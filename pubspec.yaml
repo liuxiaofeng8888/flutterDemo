@@ -34,6 +34,7 @@ dev_dependencies:
   json_model: #latest version
   build_runner: ^1.0.0
   json_serializable: ^2.0.0
+  webview_flutter: ^0.3.10+1
 
 
 
