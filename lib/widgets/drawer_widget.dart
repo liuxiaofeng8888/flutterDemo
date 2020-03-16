@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/car_record_list.dart';
 
 class DrawerWidget extends StatefulWidget {
   @override
@@ -41,20 +42,29 @@ class DrawerState extends State {
               ListTile(
                 leading: Icon(Icons.settings),
                 title: Text("乘车记录"),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                        return CarRecord(
+                        );
+                      }));
+                },
               ),
               ListTile(
                 leading: Icon(Icons.settings),
                 title: Text("我的钱包"),
+                onTap: () {},
               ),
               ListTile(
                 leading: Icon(Icons.settings),
                 title: Text("乘车记录"),
+                onTap: () {},
               ),
               ListTile(
 //                contentPadding: EdgeInsets.symmetric(horizontal: 0.0),
                 leading: Icon(Icons.settings),
                 title: Text("更多设置"),
+                onTap: () {},
               )
             ],
           ),
