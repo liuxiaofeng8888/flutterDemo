@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 ///乘车记录的item
 class CarRecordRow extends StatelessWidget {
@@ -12,26 +13,47 @@ class CarRecordRow extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return InkWell(
-      onTap: () => {},
+      onTap: () => {
+        Fluttertoast.showToast(msg: "item的点击事件",gravity: ToastGravity.CENTER)
+      },
       child: Container(
+        alignment: Alignment.centerLeft,
+        width: double.infinity,
         padding: EdgeInsets.all(5),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                Container(
-                  child: Text("纳智捷U5Ev"),
-                ),
-                Positioned(
-                  child: Text("已取消"),
-                  right: 20,
-                )
-              ],
+            Container(
+              margin: EdgeInsets.only(bottom: 20),
+              width: double.infinity,
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    child: Text("纳智捷U5Ev"),
+                  ),
+                  Positioned(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("已取消"),
+                      ],
+                    ),
+                    right: 20,
+                  )
+                ],
+              ),
             ),
-            Text("2020-03-13"),
-            Text("东方世纪中心"),
-            Text("天台山路")
+            Container(
+              child: Text("2020-03-13"),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 5),
+              child: Text("东方世纪中心"),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 5),
+              child: Text("天台山路"),
+            ),
           ],
         ),
       ),

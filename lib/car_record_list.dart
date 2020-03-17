@@ -1,6 +1,8 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/car_record_list_row.dart';
+import 'package:flutter_app/widgets/use_rule_dialog_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 ///乘车记录列表
 class CarRecord extends StatefulWidget {
@@ -48,6 +50,22 @@ class CarRecordState extends State with SingleTickerProviderStateMixin {
       appBar: AppBar(
         title: Text("乘车记录"),
         centerTitle: true,
+        actions: <Widget>[
+          GestureDetector(
+              child: Container(
+            margin: EdgeInsets.only(right: 15),
+            child: Text("开发票"),
+            alignment: Alignment.center,
+          ),onTap: ()=>{
+                showDialog(context: context,builder: (context){
+                  return UseRuleDialogWidget("使用规则","什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事"
+                      "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
+                      "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
+                      "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
+                      "什么事格式上传什么事格式上传什么事格式上传什么事格式上传格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传");
+                })
+          },)
+        ],
         bottom: TabBar(
           tabs: tabs.map((e) => Tab(text: e)).toList(),
           controller: _tabController,
@@ -85,9 +103,6 @@ class CarRecordState extends State with SingleTickerProviderStateMixin {
                           );
                         }
                       }
-//                      return ListTile(
-//                        title: Text(_words[index]),
-//                      );
                       return CarRecordRow("111", "2", "3");
                     },
                     separatorBuilder: (context, index) => Divider(
