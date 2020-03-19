@@ -1,8 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/car_record_list_row.dart';
 import 'package:flutter_app/widgets/use_rule_dialog_widget.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 ///乘车记录列表
 class CarRecord extends StatefulWidget {
@@ -43,8 +44,47 @@ class CarRecordState extends State with SingleTickerProviderStateMixin {
 
   String str = "";
 
+  String token = "";
+
+  void getLoginHttp() async {
+    try {
+      Response response = await Dio().post(
+          "http://192.168.21.74:8889/app/rest/auth/login",
+          data: {"username": "18400000003", "VCode": "111"});
+      token = response.headers.value("x-authorization");
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      sharedPreferences.setString("token", token);
+      return print(response.headers);
+    } catch (e) {
+      return print(e);
+    }
+  }
+
+  void getCarRecord() async {
+//    return print(token);
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String tokens = preferences.get('token');
+    debugPrint(tokens);
+    Response response = await Dio(BaseOptions(
+        headers: {
+          "X-Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODQwMDAwMDAwMyIsInV1aWQiOiIxNUEyQjc3OUY2QTQ0N0IxOEU3Q0JEMUQ1MUExMzMxRCIsInNwZWNpYWxVc2VyIjpmYWxzZSwibmlja05hbWUiOiJBcHBsZea4rOippuWToTM0IiwidXNlckhlYWRlciI6ImNhcnBsdXNnby1pbmZvLWltZy8yMDE5LTA4LTI4L2I5ZWNjMGRjNTczMjQzYzQyNzU5MTBjZTYzNTQ0ODNlLmpwZyIsInNjb3BlcyI6WyJST0xFX0FDQ0VTU19UT0tFTiJdLCJpc3MiOiJodHRwOi8vd3d3LnJpaHVpc29mdC5jb20iLCJpYXQiOjE1ODQ1OTgxOTEsImV4cCI6MTU4NDU5ODMxMX0.DdCLWQJSjalOiXVvKX9hXLeJi_EEu4vdRnu_iK0D4rRB55WmKfxmIqbXyqjMYW1dZvNsg9O9AGquKh2q6st9dQ"
+        } )).post(
+        "http://192.168.21.74:8889/app/rest/travel/mobile/getDriverFinishedOrder",
+        data: {"pageNo": "1",
+        "latitude":"30.199415",
+        "longitude":"120.27398",
+        "locationMode":"1",
+        "uid":"-",
+        "phoneType":"1",
+        "IMEI":"868067034016204",
+        "868067034016204":"carplusgo-android-1.0.82"});
+    return print(response);
+  }
+
   @override
   Widget build(BuildContext context) {
+    getLoginHttp();
+//  getCarRecord();
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
@@ -52,19 +92,25 @@ class CarRecordState extends State with SingleTickerProviderStateMixin {
         centerTitle: true,
         actions: <Widget>[
           GestureDetector(
-              child: Container(
-            margin: EdgeInsets.only(right: 15),
-            child: Text("开发票"),
-            alignment: Alignment.center,
-          ),onTap: ()=>{
-                showDialog(context: context,builder: (context){
-                  return UseRuleDialogWidget("使用规则","什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事"
-                      "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
-                      "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
-                      "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
-                      "什么事格式上传什么事格式上传什么事格式上传什么事格式上传格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传");
-                })
-          },)
+            child: Container(
+              margin: EdgeInsets.only(right: 15),
+              child: Text("开发票"),
+              alignment: Alignment.center,
+            ),
+            onTap: () => {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return UseRuleDialogWidget(
+                        "使用规则",
+                        "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事"
+                            "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
+                            "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
+                            "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
+                            "什么事格式上传什么事格式上传什么事格式上传什么事格式上传格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传");
+                  })
+            },
+          )
         ],
         bottom: TabBar(
           tabs: tabs.map((e) => Tab(text: e)).toList(),
