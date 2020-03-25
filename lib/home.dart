@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/widgets/Isolate_widget.dart';
 import 'package:flutter_app/widgets/drawer_widget.dart';
 
 import 'widgets/login_widget.dart';
@@ -37,8 +38,10 @@ class HomeWidget extends StatelessWidget {
                   },
                 ),
               ),
-              Divider(height: 1.0,
-                color: Colors.grey,),
+              Divider(
+                height: 1.0,
+                color: Colors.grey,
+              ),
               new Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.only(
@@ -51,13 +54,36 @@ class HomeWidget extends StatelessWidget {
                   onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                          return DrawerWidget();
-                        }));
+                      return DrawerWidget();
+                    }));
                   },
                 ),
               ),
-              Divider(height: 1.0,
-                color: Colors.grey,),
+              Divider(
+                height: 1.0,
+                color: Colors.grey,
+              ),
+              new Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.only(
+                    left: 0, top: 10, right: 0, bottom: 10),
+                child: GestureDetector(
+                  child: Text(
+                    "Isolate测试",
+                    style: TextStyle(color: Colors.green, fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return IsolateWidget();
+                    }));
+                  },
+                ),
+              ),
+              Divider(
+                height: 1.0,
+                color: Colors.grey,
+              ),
             ],
           ),
         ));

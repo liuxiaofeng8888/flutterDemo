@@ -52,7 +52,8 @@ class CarRecordState extends State with SingleTickerProviderStateMixin {
           "http://192.168.21.74:8889/app/rest/auth/login",
           data: {"username": "18400000003", "VCode": "111"});
       token = response.headers.value("x-authorization");
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
       sharedPreferences.setString("token", token);
       return print(response.headers);
     } catch (e) {
@@ -65,20 +66,22 @@ class CarRecordState extends State with SingleTickerProviderStateMixin {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     String tokens = preferences.get('token');
     debugPrint(tokens);
-    Response response = await Dio(BaseOptions(
-        headers: {
-          "X-Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODQwMDAwMDAwMyIsInV1aWQiOiIxNUEyQjc3OUY2QTQ0N0IxOEU3Q0JEMUQ1MUExMzMxRCIsInNwZWNpYWxVc2VyIjpmYWxzZSwibmlja05hbWUiOiJBcHBsZea4rOippuWToTM0IiwidXNlckhlYWRlciI6ImNhcnBsdXNnby1pbmZvLWltZy8yMDE5LTA4LTI4L2I5ZWNjMGRjNTczMjQzYzQyNzU5MTBjZTYzNTQ0ODNlLmpwZyIsInNjb3BlcyI6WyJST0xFX0FDQ0VTU19UT0tFTiJdLCJpc3MiOiJodHRwOi8vd3d3LnJpaHVpc29mdC5jb20iLCJpYXQiOjE1ODQ1OTgxOTEsImV4cCI6MTU4NDU5ODMxMX0.DdCLWQJSjalOiXVvKX9hXLeJi_EEu4vdRnu_iK0D4rRB55WmKfxmIqbXyqjMYW1dZvNsg9O9AGquKh2q6st9dQ"
-        } )).post(
+    Response response = await Dio(BaseOptions(headers: {
+      "X-Authorization":
+          "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxODQwMDAwMDAwMyIsInV1aWQiOiIxNUEyQjc3OUY2QTQ0N0IxOEU3Q0JEMUQ1MUExMzMxRCIsInNwZWNpYWxVc2VyIjpmYWxzZSwibmlja05hbWUiOiJBcHBsZea4rOippuWToTM0IiwidXNlckhlYWRlciI6ImNhcnBsdXNnby1pbmZvLWltZy8yMDE5LTA4LTI4L2I5ZWNjMGRjNTczMjQzYzQyNzU5MTBjZTYzNTQ0ODNlLmpwZyIsInNjb3BlcyI6WyJST0xFX0FDQ0VTU19UT0tFTiJdLCJpc3MiOiJodHRwOi8vd3d3LnJpaHVpc29mdC5jb20iLCJpYXQiOjE1ODQ1OTgxOTEsImV4cCI6MTU4NDU5ODMxMX0.DdCLWQJSjalOiXVvKX9hXLeJi_EEu4vdRnu_iK0D4rRB55WmKfxmIqbXyqjMYW1dZvNsg9O9AGquKh2q6st9dQ"
+    })).post(
         "http://192.168.21.74:8889/app/rest/travel/mobile/getDriverFinishedOrder",
-        data: {"pageNo": "1",
-        "latitude":"30.199415",
-        "longitude":"120.27398",
-        "locationMode":"1",
-        "uid":"-",
-        "phoneType":"1",
-        "IMEI":"868067034016204",
-        "868067034016204":"carplusgo-android-1.0.82"});
-    return print(response);
+        data: {
+          "pageNo": "1",
+          "latitude": "30.199415",
+          "longitude": "120.27398",
+          "locationMode": "1",
+          "uid": "-",
+          "phoneType": "1",
+          "IMEI": "868067034016204",
+          "868067034016204": "carplusgo-android-1.0.82"
+        });
+    return print(response.data);
   }
 
   @override
@@ -101,13 +104,12 @@ class CarRecordState extends State with SingleTickerProviderStateMixin {
               showDialog(
                   context: context,
                   builder: (context) {
-                    return UseRuleDialogWidget(
-                        "使用规则",
-                        "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事"
-                            "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
-                            "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
-                            "什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传"
-                            "什么事格式上传什么事格式上传什么事格式上传什么事格式上传格式上传什么事格式上传什么事格式上传什么事格式上传什么事格式上传");
+                    return UseRuleDialogWidget("使用规则", """乘车人数限制：\n
+1.车型五人座,出行人数为四人以内(含四人);\n
+2.车型七人座,出行人数为六人以内(含六人).\n
+乘车行李数限制：\n
+1.五人座车,行李数为2-3个(26寸以上的2个,26寸以下3个);\n
+2.七人座车,行李数为3-4个(26寸以上3个,26寸以下4个).""");
                   })
             },
           )
