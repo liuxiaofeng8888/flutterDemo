@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/Isolate_widget.dart';
 import 'package:flutter_app/widgets/drawer_widget.dart';
+import 'package:flutter_app/widgets/take_photo_widget2.dart';
 
 import 'widgets/login_widget.dart';
+import 'widgets/take_photo_widget.dart';
 
 ///主页面
 class HomeWidget extends StatelessWidget {
@@ -84,6 +86,27 @@ class HomeWidget extends StatelessWidget {
                 height: 1.0,
                 color: Colors.grey,
               ),
+              new Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.only(
+                    left: 0, top: 10, right: 0, bottom: 10),
+                child: GestureDetector(
+                  child: Text(
+                    "调用拍照",
+                    style: TextStyle(color: Colors.green, fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return TakePhotoWidget2();
+                    }));
+                  },
+                ),
+              ),
+              Divider(
+                height: 1.0,
+                color: Colors.grey,
+              )
             ],
           ),
         ));
