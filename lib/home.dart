@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/Isolate_widget.dart';
+import 'package:flutter_app/widgets/animation_widget.dart';
 import 'package:flutter_app/widgets/drawer_widget.dart';
+import 'package:flutter_app/widgets/swipe_widget.dart';
 import 'package:flutter_app/widgets/take_photo_widget2.dart';
 
 import 'widgets/login_widget.dart';
-import 'widgets/take_photo_widget.dart';
 
 ///主页面
 class HomeWidget extends StatelessWidget {
@@ -100,6 +101,56 @@ class HomeWidget extends StatelessWidget {
                         MaterialPageRoute(builder: (context) {
                       return TakePhotoWidget2();
                     }));
+                  },
+                ),
+              ),
+              Divider(
+                height: 1.0,
+                color: Colors.grey,
+              ),
+              new Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.only(
+                    left: 0, top: 10, right: 0, bottom: 10),
+                child: GestureDetector(
+                  child: Text(
+                    "banner页面",
+                    style: TextStyle(color: Colors.green, fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SwipeWidget();
+                    }));
+                  },
+                ),
+              ),
+              Divider(
+                height: 1.0,
+                color: Colors.grey,
+              ),
+              new Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.only(
+                    left: 0, top: 10, right: 0, bottom: 10),
+                child: GestureDetector(
+                  child: Text(
+                    "动画页面",
+                    style: TextStyle(color: Colors.green, fontSize: 15),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            transitionDuration: Duration(seconds: 3),
+                            pageBuilder: (BuildContext context,
+                                Animation animation,
+                                Animation secondaryAnimation) {
+                              return new FadeTransition(
+                                opacity: animation,
+                                child: AnimationWidget(),
+                              );
+                            }));
                   },
                 ),
               ),
